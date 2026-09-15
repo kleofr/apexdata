@@ -1,0 +1,98 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --neon-orange: #FF6A00;
+  --neon-cyan: #00F0FF;
+  --f1-dark: #0D0E12;
+  --f1-panel: #141720;
+}
+
+/* Custom telemetry scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #0D0E12;
+}
+::-webkit-scrollbar-thumb {
+  background: #2A3042;
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #FF6A00;
+}
+
+/* Motorsport angled corner styling */
+.hud-panel {
+  background: linear-gradient(180deg, rgba(24, 28, 40, 0.95) 0%, rgba(16, 19, 27, 0.98) 100%);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 4px 24px -2px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  position: relative;
+}
+
+.hud-panel::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 12px;
+  height: 2px;
+  background: #FF6A00;
+}
+
+.hud-panel-cyan::before {
+  background: #00F0FF;
+}
+
+/* Subtle carbon texture overlay */
+.carbon-pattern {
+  background-image: radial-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 0);
+  background-size: 16px 16px;
+}
+
+/* F1 Telemetry Scanline animation */
+@keyframes radar-scan {
+  0% {
+    transform: translateY(-100%);
+    opacity: 0;
+  }
+  50% {
+    opacity: 0.8;
+  }
+  100% {
+    transform: translateY(1000%);
+    opacity: 0;
+  }
+}
+
+.animate-scanline {
+  animation: radar-scan 3s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+@keyframes pulse-glow {
+  0%, 100% {
+    opacity: 0.9;
+    box-shadow: 0 0 15px rgba(255, 106, 0, 0.4);
+  }
+  50% {
+    opacity: 0.5;
+    box-shadow: 0 0 5px rgba(255, 106, 0, 0.1);
+  }
+}
+
+.animate-pulse-glow {
+  animation: pulse-glow 2.5s ease-in-out infinite;
+}
+
+/* Ensure ECharts floating tooltips are strictly hidden and disabled when modals/overlays are open */
+body.overlay-active .echarts-tooltip,
+body.overlay-active div[style*="z-index"][style*="position: absolute"] {
+  display: none !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+  visibility: hidden !important;
+}
+
